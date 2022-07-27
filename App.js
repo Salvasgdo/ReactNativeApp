@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React, { useEffect } from 'react';
+import  HomeNavigation from "./app/screens/HomeNavigation";
+import Login from "./app/screens/Login";
+import {createStackNavigator} from "@react-navigation/stack";
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { View, Text, Button, Alert, AppState } from 'react-native';
+import axios from "axios";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+  const Stack = createStackNavigator();
+    return (
+      <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{gestureEnabled: false}} >
+          <Stack.Screen name="Login" component={Login} options={{headerShown: false, headerLeft: ()=> null}}/>
+          <Stack.Screen name="Home" component={HomeNavigation} options={{headerShown: false }}  />
+        </Stack.Navigator>
+      </NavigationContainer>
+      </SafeAreaProvider>
+
+    );
+}
